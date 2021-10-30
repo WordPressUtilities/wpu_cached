@@ -4,7 +4,7 @@
 Plugin Name: WPU Cached
 Description: Simple helpers to help you cache anything
 Plugin URI: https://github.com/WordPressUtilities/wpu_cached
-Version: 0.1.0
+Version: 0.1.1
 Author: Darklg
 Author URI: https://darklg.me/
 License: MIT License
@@ -40,6 +40,9 @@ function wpu_cached__wpdb_get($type, $q, $cache_duration = false) {
         switch ($type) {
         case 'col':
             $result = $wpdb->get_col($q);
+            break;
+        case 'results':
+            $result = $wpdb->get_results($q, ARRAY_A);
             break;
         }
         wp_cache_set($cache_id, $result, '', $cache_duration);
